@@ -2,6 +2,8 @@
 
 import useMacbookStore from "@/store";
 import clsx from "clsx";
+import { Canvas } from "@react-three/fiber";
+import { Box, OrbitControls } from "@react-three/drei";
 
 const ProductViewer = () => {
   const { color, scale, setColor, setScale } = useMacbookStore();
@@ -11,7 +13,9 @@ const ProductViewer = () => {
       <h2>Take a closer look.</h2>
 
       <div className="controls">
-        <p className="info">MacbookPro {scale} in {color}</p>
+        <p className="info">
+          MacbookPro {scale} in {color}
+        </p>
 
         <div className="flex-center gap-5 mt-5">
           <div className="color-control">
@@ -56,7 +60,18 @@ const ProductViewer = () => {
         </div>
       </div>
 
-      <p className="text-white text-4xl">Render </p>
+      <Canvas
+        id="canvas"
+        camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}
+      >
+        <Box
+          position={[0, 0, 0]}
+          scale={10 * scale}
+          material-color={color}
+        ></Box>
+
+        <OrbitControls enableZoom={false}></OrbitControls>
+      </Canvas>
     </section>
   );
 };
