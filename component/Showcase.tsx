@@ -2,6 +2,9 @@
 import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Showcase = () => {
   const isTablet = useMediaQuery({ query: "max-width: 1024px" });
@@ -70,12 +73,12 @@ const Showcase = () => {
 
           <div className="max-w-3xs space-y-14">
             <div className="space-y-2">
-              <p>Up tp</p>
+              <p>Up to</p>
               <h3>4x faster</h3>
               <p>pro rendering performance than M2</p>
             </div>
             <div className="space-y-2">
-              <p>Up tp</p>
+              <p>Up to</p>
               <h3>1.5x faster</h3>
               <p>CPU performance than M2</p>
             </div>
