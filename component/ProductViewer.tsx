@@ -3,10 +3,9 @@
 import useMacbookStore from "@/store";
 import clsx from "clsx";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import MacbookModel14 from "@/component/models/Macbook-14";
 import StudioLight from "./three/StudioLight";
-import ModelSwitcher from "./three/modelSwitcher";
+import ModelSwitcher from "./three/ModelSwitcher";
 import { useMediaQuery } from "react-responsive";
 
 const ProductViewer = () => {
@@ -20,7 +19,7 @@ const ProductViewer = () => {
 
       <div className="controls">
         <p className="info">
-          MacbookPro {scale} in {color}
+          Macbook Pro | Available in 14" & 16"Space Grey & Dark colors
         </p>
 
         <div className="flex-center gap-5 mt-5">
@@ -71,8 +70,11 @@ const ProductViewer = () => {
         camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}
       >
         <StudioLight />
-        <MacbookModel14 scale={0.06} position={[0, 0, 0]} />
-        <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} />
+
+        <ModelSwitcher
+          scale={isMobile ? scale - 0.03 : scale}
+          isMobile={isMobile}
+        />
       </Canvas>
     </section>
   );
