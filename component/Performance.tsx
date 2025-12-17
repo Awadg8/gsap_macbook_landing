@@ -14,7 +14,7 @@ const Performance = () => {
 
   useGSAP(
     () => {
-      // Text fade-in animation (runs on all devices)
+      // Text fade-in animation
       gsap.fromTo(
         ".content p",
         {
@@ -36,35 +36,40 @@ const Performance = () => {
         }
       );
 
-      if (isMobile) return;
+      if (isMobile || !sectionRef.current) return;
 
       // Image animations (desktop only)
-        const tl = gsap.timeline({
-            defaults:{ ease: "power1.inOut", duration:2, overwrite: "auto"},
-            scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-            onRefresh: () => ScrollTrigger.refresh(),
-          },
-        });
+      const tl = gsap.timeline({
+        defaults: { ease: "power1.inOut", duration: 2, overwrite: "auto" },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
 
-        // Animate all images at time 0, excluding p5
-        performanceImgPositions.forEach((pos) => {
-          if(pos.id === 'p5') return
+      // Animate all images at time 0, excluding p5
+      performanceImgPositions.forEach((pos) => {
+        if (pos.id === "p5") return;
 
-          const toVars =  {};
+        const toVars: Record<string, string | number> = {};
 
-          if(pos.left !== undefined) toVars.left = `${pos.left}%`;
-          if(pos.right !== undefined) toVars.right = `${pos.right}%`;
-          if(pos.bottom !== undefined) toVars.bottom = `${pos.bottom}%`;
-          if(pos.transform !== undefined) toVars.transform = `${pos.transform}%`;
+        if ("left" in pos && pos.left !== undefined)
+          toVars.left = `${pos.left}%`;
+        if ("right" in pos && pos.right !== undefined)
+          toVars.right = `${pos.right}%`;
+        if ("bottom" in pos && pos.bottom !== undefined)
+          toVars.bottom = `${pos.bottom}%`;
+        if ("transform" in pos && pos.transform !== undefined)
+          toVars.transform = String(pos.transform);
 
-          tl.to(`.${pos.id}`, toVars, 0)
-        });
-    )},
-
+        tl.to(`.${pos.id}`, toVars, 0);
+      });
+    },
+    { scope: sectionRef, dependencies: [isMobile] }
+  );
 
   return (
     <section ref={sectionRef} className="performance">
