@@ -15,7 +15,7 @@ const Footer = () => {
         <p>Copyright © 2025 Apple Inc. All rights reserved.</p>
 
         <ul>
-          {footerLinks.map(({link,label}) => (
+          {footerLinks.map(({ link, label }) => (
             <li key={label}>
               <a href={link}>{label}</a>
             </li>
