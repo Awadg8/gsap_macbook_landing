@@ -3,7 +3,6 @@
 import useMacbookStore from "@/store";
 import clsx from "clsx";
 import { Canvas } from "@react-three/fiber";
-import MacbookModel14 from "@/component/models/Macbook-14";
 import StudioLight from "./three/StudioLight";
 import ModelSwitcher from "./three/ModelSwitcher";
 import { useMediaQuery } from "react-responsive";
@@ -22,7 +21,7 @@ const ProductViewer = () => {
           Macbook Pro | Available in 14" & 16"Space Grey & Dark colors
         </p>
 
-        <div className="flex-center gap-5 mt-5">
+        <div className="flex-center gap-5 mt-2">
           <div className="color-control">
             <div
               onClick={() => setColor("#adb5bd")}

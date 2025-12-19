@@ -60,7 +60,7 @@ const ModelSwitcher = ({
 
   const controlsConfig = {
     snap: true,
-    speed: 1,
+    speed: 1.5,
     zoom: 1,
     polar: [-Math.PI, Math.PI] as [number, number],
     azimuth: [-Infinity, Infinity] as [number, number],
@@ -76,7 +76,7 @@ const ModelSwitcher = ({
       </PresentationControls>
       <PresentationControls {...controlsConfig}>
         <group ref={smallMacbookRef}>
-          <MacbookModel14 scale={isMobile ? 0.03 : 0.06} />
+          <MacbookModel14 scale={isMobile ? 0.035 : 0.06} />
         </group>
       </PresentationControls>
     </>
